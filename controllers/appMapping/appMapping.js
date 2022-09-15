@@ -267,7 +267,7 @@ function decodeBase64Image(base64Str) {
   var matches = base64Str.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var image = {};
   if (!matches || matches.length !== 3) {
-    throw new Error("Invalid base64 string");
+    throw new Error("Invalid base64 string");  
   }
 
   image.type = matches[1];
