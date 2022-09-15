@@ -44,6 +44,8 @@ module.exports = (mongoose) => {
           kw_093: { type: String, default: "" },
           v_unb: { type: String, default: "" },
           i_unb: { type: String, default: "" },
+          sign_1: { type: String, default: "" },
+          sign_2: { type: String, default: "" },
           createdAt: { type: Date, default: Date.now },
         },
       ],

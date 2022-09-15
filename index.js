@@ -6,8 +6,13 @@ const mongoString = process.env.DATABASE_URL;
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
+const fs = require('fs');
+const path = require('path');
 
 app.use(cors());
+app.use(express.json({
+  limit: '50mb'
+}));
 
 const jsonParser = bodyParser.json();
 
