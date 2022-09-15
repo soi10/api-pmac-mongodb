@@ -28,7 +28,11 @@ database.once("connected", () => {
 });
 
 const routerappMapping = require("./routes/appMapping/appMapping");
+const routerRegisDevice = require("./routes/regis_device");
+
 app.use("/appMapping/", jsonParser, routerappMapping);
+app.use("/regisdevice/", routerRegisDevice);
+
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

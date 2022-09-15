@@ -5,4 +5,5 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.appmapping = require("./appMapping/appMapping")(mongoose);
+db.regisDevice = require("./regis_device")(mongoose);
 module.exports = db;
