@@ -20,7 +20,7 @@ module.exports = (mongoose) => {
       object.id = _id;
       return object;
     });
-    const uploadexcell = mongoose.model("uploadexcell", schema);
+    const uploadexcell = mongoose.model("meterinstall", schema);
     return uploadexcell;
   };
   
