@@ -6,4 +6,5 @@ db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.appmapping = require("./appMapping/appMapping")(mongoose);
 db.regisDevice = require("./regis_device")(mongoose);
+db.uploadexcell = require("./upload_excel")(mongoose);
 module.exports = db;
