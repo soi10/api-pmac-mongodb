@@ -12,7 +12,7 @@ const create = async (req, res) => {
   const peano = req.body.peano;
   try {
     const dataToSave = await uploadexcell.find({
-      peano: { $regex: peano },
+      peano: peano,
     });
     if (dataToSave.length == 0) {
       let info_appmapping = new appmapping({
