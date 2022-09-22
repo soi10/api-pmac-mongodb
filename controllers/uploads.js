@@ -29,11 +29,20 @@ exports.upload = async function(req, res, next) {
         mruname: jsonData[i].MRU.substr(0, 4),
         readnumber: jsonData[i].readnumber,
         ca: jsonData[i].ca,
+        install: jsonData[i].install,
         name: jsonData[i].name,
         address: jsonData[i].address,
         peano: jsonData[i].peano.replace(/^0+/, ''),
+        producer: jsonData[i].producer,
+        type: jsonData[i].type,
         phase: jsonData[i].phase,
         amp: jsonData[i].amp,
+        firtinstall: jsonData[i].firtinstall,
+        dateinstall: jsonData[i].dateinstall,
+        value: jsonData[i].value,
+        code: jsonData[i].code,
+        unitinstall: jsonData[i].unitinstall,
+        causeinstall: jsonData[i].causeinstall,
       }
       console.log("data",data);
       news.push(data); 
