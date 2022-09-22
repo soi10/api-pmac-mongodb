@@ -13,7 +13,7 @@ module.exports = (mongoose) => {
       name: { type: String, default: "" },
       address: { type: String, default: "" },
       peano: { type: String, default: "" },
-      peoducer: { type: String, default: "" },
+      producer: { type: String, default: "" },
       type: { type: String, default: "" },
       phase: { type: String, default: "" },
       amp: { type: String, default: "" },
