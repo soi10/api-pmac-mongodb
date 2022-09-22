@@ -16,7 +16,7 @@ const create = async (req, res) => {
     });
     if (dataToSave.length == 0) {
       let info_appmapping = new appmapping({
-        peacode: req.body.peacode,
+        peaname: req.body.peacode,
         peano: req.body.peano,
         apptype: req.body.apptype,
         sign_1: await saveImageToDisk(req.body.sign_1),
@@ -31,7 +31,7 @@ const create = async (req, res) => {
       }
     } else {
       let info_appmapping = new appmapping({
-        peacode: req.body.peacode,
+        peaname: req.body.peacode,
         peano: dataToSave[0].peano,
         ca: dataToSave[0].ca,
         fullname: dataToSave[0].name,
@@ -118,93 +118,182 @@ const findDataMapping = async (req, res) => {
 };
 
 const countMeterTypes = async (req, res) => {
-  try {
-    const data = await appmapping.aggregate([
-      {
-        $match: { peacode: req.body.peacode },
-      },
-      {
-        $facet: {
-          first: [
-            {
-              $match: {
-                apptype: "1P2W (Direct)",
+  console.log(req.body.peacode);
+  if (req.body.peacode == "Select") {
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  apptype: "1P2W (Direct)",
+                },
               },
-            },
-          ],
-          second: [
-            {
-              $match: {
-                apptype: "3P4W (Direct)",
+            ],
+            second: [
+              {
+                $match: {
+                  apptype: "3P4W (Direct)",
+                },
               },
-            },
-          ],
-          third: [
-            {
-              $match: {
-                apptype: "1P2W With CT",
+            ],
+            third: [
+              {
+                $match: {
+                  apptype: "1P2W With CT",
+                },
               },
-            },
-          ],
-          four: [
-            {
-              $match: {
-                apptype: "Smart meter 3P4W with CT",
+            ],
+            four: [
+              {
+                $match: {
+                  apptype: "Smart meter 3P4W with CT",
+                },
               },
-            },
-          ],
-          five: [
-            {
-              $match: {
-                apptype: "CT Test",
+            ],
+            five: [
+              {
+                $match: {
+                  apptype: "CT Test",
+                },
               },
-            },
-          ],
-          six: [
-            {
-              $match: {
-                apptype: "6",
+            ],
+            six: [
+              {
+                $match: {
+                  apptype: "6",
+                },
               },
-            },
-          ],
-          seven: [
-            {
-              $match: {
-                apptype: "",
+            ],
+            seven: [
+              {
+                $match: {
+                  apptype: "",
+                },
               },
-            },
-          ],
-        },
-      },
-      {
-        $project: {
-          A: {
-            $size: "$first",
-          },
-          B: {
-            $size: "$second",
-          },
-          C: {
-            $size: "$third",
-          },
-          D: {
-            $size: "$four",
-          },
-          E: {
-            $size: "$five",
-          },
-          F: {
-            $size: "$six",
-          },
-          G: {
-            $size: "$seven",
+            ],
           },
         },
-      },
-    ]);
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+            D: {
+              $size: "$four",
+            },
+            E: {
+              $size: "$five",
+            },
+            F: {
+              $size: "$six",
+            },
+            G: {
+              $size: "$seven",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  } else {
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: { peacode: req.body.peacode },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  apptype: "1P2W (Direct)",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  apptype: "3P4W (Direct)",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  apptype: "1P2W With CT",
+                },
+              },
+            ],
+            four: [
+              {
+                $match: {
+                  apptype: "Smart meter 3P4W with CT",
+                },
+              },
+            ],
+            five: [
+              {
+                $match: {
+                  apptype: "CT Test",
+                },
+              },
+            ],
+            six: [
+              {
+                $match: {
+                  apptype: "6",
+                },
+              },
+            ],
+            seven: [
+              {
+                $match: {
+                  apptype: "",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+            D: {
+              $size: "$four",
+            },
+            E: {
+              $size: "$five",
+            },
+            F: {
+              $size: "$six",
+            },
+            G: {
+              $size: "$seven",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
   }
 };
 

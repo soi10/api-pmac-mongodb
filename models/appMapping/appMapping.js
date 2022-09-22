@@ -5,7 +5,10 @@ module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
       _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
-      peacode: { type: String, default: "" },
+      mru: { type: String, default: "" },
+      mruname: { type: String, default: "" },
+      readnumber: { type: String, default: "" },
+      peaname: { type: String, default: "" },
       tsic: { type: String, default: "" },
       trsg: { type: String, default: "" },
       ca: { type: String, default: "" },

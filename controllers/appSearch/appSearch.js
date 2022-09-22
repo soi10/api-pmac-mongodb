@@ -10,7 +10,7 @@ const search = async (req, res) => {
   } else {
     try {
       const dataTosearch = await uploadexcell.find({
-        peano: { $regex: peano },
+        peano: peano,
       });
       res.status(200).json({
         ชื่อผู้ใช้ไฟฟ้า: dataTosearch[0].name,
