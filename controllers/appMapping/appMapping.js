@@ -16,7 +16,6 @@ const create = async (req, res) => {
     });
     if (dataToSave.length == 0) {
       let info_appmapping = new appmapping({
-        peaname: req.body.peacode,
         peano: req.body.peano,
         apptype: req.body.apptype,
         I_N: req.body.I_N,
@@ -104,11 +103,26 @@ const create = async (req, res) => {
       }
     } else {
       let info_appmapping = new appmapping({
-        peaname: req.body.peacode,
-        peano: dataToSave[0].peano,
+        peano: req.body.peano,
+        mru: dataToSave[0].mru,
+        mruname: dataToSave[0].mruname,
+        readnumber: dataToSave[0].readnumber,
         ca: dataToSave[0].ca,
-        fullname: dataToSave[0].name,
+        install: dataToSave[0].install,
+        name: dataToSave[0].name,
         address: dataToSave[0].address,
+        peano: dataToSave[0].peano,
+        peoducer: dataToSave[0].peoducer,
+        type: dataToSave[0].type,
+        phase: dataToSave[0].phase,
+        amp: dataToSave[0].amp,
+        firtinstall: dataToSave[0].firtinstall,
+        dateinstall: dataToSave[0].dateinstall,
+        value: dataToSave[0].value,
+        code: dataToSave[0].code,
+        unitintall: dataToSave[0].unitintall,
+        causeinstall: dataToSave[0].causeinstall,
+        fullname: dataToSave[0].name,
         apptype: req.body.apptype,
         I_N: req.body.I_N,
         I_A: req.body.I_A,
