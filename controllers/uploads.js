@@ -26,10 +26,12 @@ exports.upload = async function(req, res, next) {
     for (i=0; i<jsonData.length; i++) {
       let data = {
         mru: jsonData[i].MRU,
+        mruname: jsonData[i].MRU.substr(0, 4),
+        readnumber: jsonData[i].readnumber,
         ca: jsonData[i].ca,
         name: jsonData[i].name,
         address: jsonData[i].address,
-        peano: jsonData[i].peano,
+        peano: jsonData[i].peano.replace(/^0+/, ''),
         phase: jsonData[i].phase,
         amp: jsonData[i].amp,
       }

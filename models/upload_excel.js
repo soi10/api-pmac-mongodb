@@ -6,6 +6,8 @@ module.exports = (mongoose) => {
       {
         _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
         mru: { type: String, default: "" },
+        mruname: { type: String, default: "" },
+        readnumber: { type: String, default: "" },
         ca: { type: String, default: "" },
         name: { type: String, default: "" },
         address: { type: String, default: "" },

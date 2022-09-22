@@ -1,20 +1,19 @@
-const ObjectId = require("mongodb").ObjectId;
-const { regisDevice } = require("../models");
-const db = require("../models");
-const RegisDevice = db.regisDevice; 
-module.exports = async (req,res,next) =>{
-    const {secretkey} = req.body
-    try{
-        const data = await RegisDevice.findOne({'secretkey':secretkey});
-        if(!data){
-            throw 'Invalid user ID';
-        }else{
-        res.status(200);
-        next();
-        }
-    }catch{
-        res.status(401).json({
-            error: new Error('Invalid reauest!')
-        })
+const jwt = require('jsonwebtoken');
+const config = process.env;
+
+const verifyToken = (req,res,next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token']
+    
+    if(!token){
+        return res.status(403).json({message :"A Token is required for authentication"})
     }
+    try{
+        //const decoded = jwt.verify(token,config.KEY);
+        console.log(token)
+    } catch (err){
+        return res.status(401).json({message :"Invalid Token"})
+    }
+    return next()
 }
+
+module.exports = verifyToken;
