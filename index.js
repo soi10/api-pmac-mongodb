@@ -8,7 +8,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const path = require("path");
-const auth = require('./middleware/auth')
+const auth = require("./middleware/auth");
 
 global.__basedir = __dirname + "/..";
 
@@ -39,7 +39,7 @@ const routerUpload = require("./routes/uploads");
 
 app.use("/appMapping/", routerappMapping);
 app.use("/regisdevice/", routerRegisDevice);
-app.use("/uploads/",routerUpload);
+app.use("/uploads/", routerUpload);
 app.use("/appsearch/", jsonParser, routerappSearch);
 
 const PORT = process.env.PORT;

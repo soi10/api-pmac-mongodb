@@ -12,7 +12,7 @@ const create = async (req, res) => {
   const peano = req.body.peano;
   try {
     const dataToSave = await uploadexcell.find({
-      peano: { $regex: peano },
+      peano: peano,
     });
     if (dataToSave.length == 0) {
       let info_appmapping = new appmapping({
@@ -112,11 +112,11 @@ const create = async (req, res) => {
         name: dataToSave[0].name,
         address: dataToSave[0].address,
         peano: dataToSave[0].peano,
-        peoducer: dataToSave[0].peoducer,
+        producer: dataToSave[0].producer,
         type: dataToSave[0].type,
         phase: dataToSave[0].phase,
         amp: dataToSave[0].amp,
-        firtinstall: dataToSave[0].firtinstall,
+        firstinstall: dataToSave[0].firstinstall,
         dateinstall: dataToSave[0].dateinstall,
         value: dataToSave[0].value,
         code: dataToSave[0].code,
@@ -197,8 +197,8 @@ const create = async (req, res) => {
         BaName: req.body.BaName,
         Peacode: req.body.Peacode,
         Peaname: req.body.Peaname,
-        //sign_1: await saveImageToDisk(req.body.sign_1),
-        //sign_2: await saveImageToDisk(req.body.sign_2),
+        // sign_1: await saveImageToDisk(req.body.sign_1),
+        // sign_2: await saveImageToDisk(req.body.sign_2),
       });
       const dataToSave1 = await info_appmapping.save();
       try {
@@ -286,35 +286,35 @@ const countMeterTypes = async (req, res) => {
             first: [
               {
                 $match: {
-                  apptype: "1P2W (Direct)",
+                  apptype: "1",
                 },
               },
             ],
             second: [
               {
                 $match: {
-                  apptype: "3P4W (Direct)",
+                  apptype: "2",
                 },
               },
             ],
             third: [
               {
                 $match: {
-                  apptype: "1P2W With CT",
+                  apptype: "3",
                 },
               },
             ],
             four: [
               {
                 $match: {
-                  apptype: "Smart meter 3P4W with CT",
+                  apptype: "4",
                 },
               },
             ],
             five: [
               {
                 $match: {
-                  apptype: "CT Test",
+                  apptype: "5",
                 },
               },
             ],
@@ -375,35 +375,35 @@ const countMeterTypes = async (req, res) => {
             first: [
               {
                 $match: {
-                  apptype: "1P2W (Direct)",
+                  apptype: "1",
                 },
               },
             ],
             second: [
               {
                 $match: {
-                  apptype: "3P4W (Direct)",
+                  apptype: "2",
                 },
               },
             ],
             third: [
               {
                 $match: {
-                  apptype: "1P2W With CT",
+                  apptype: "3",
                 },
               },
             ],
             four: [
               {
                 $match: {
-                  apptype: "Smart meter 3P4W with CT",
+                  apptype: "4",
                 },
               },
             ],
             five: [
               {
                 $match: {
-                  apptype: "CT Test",
+                  apptype: "5",
                 },
               },
             ],
