@@ -37,7 +37,7 @@ const routerappSearch = require("./routes/appSearch/appSearch");
 const routerRegisDevice = require("./routes/regis_device");
 const routerUpload = require("./routes/uploads");
 
-app.use("/appMapping/",auth, routerappMapping);
+app.use("/appMapping/", routerappMapping);
 app.use("/regisdevice/", routerRegisDevice);
 app.use("/uploads/",routerUpload);
 app.use("/appsearch/", jsonParser, routerappSearch);

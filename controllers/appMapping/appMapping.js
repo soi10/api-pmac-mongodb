@@ -91,8 +91,8 @@ const create = async (req, res) => {
         BaName: req.body.BaName,
         Peacode: req.body.Peacode,
         Peaname: req.body.Peaname,
-        sign_1: await saveImageToDisk(req.body.sign_1),
-        sign_2: await saveImageToDisk(req.body.sign_2),
+        //sign_1: await saveImageToDisk(req.body.sign_1),
+        //sign_2: await saveImageToDisk(req.body.sign_2),
       });
 
       try {
@@ -197,8 +197,8 @@ const create = async (req, res) => {
         BaName: req.body.BaName,
         Peacode: req.body.Peacode,
         Peaname: req.body.Peaname,
-        sign_1: await saveImageToDisk(req.body.sign_1),
-        sign_2: await saveImageToDisk(req.body.sign_2),
+        //sign_1: await saveImageToDisk(req.body.sign_1),
+        //sign_2: await saveImageToDisk(req.body.sign_2),
       });
       const dataToSave1 = await info_appmapping.save();
       try {
