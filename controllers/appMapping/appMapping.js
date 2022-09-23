@@ -9,7 +9,11 @@ const { promisify } = require("util");
 const writeFileAsync = promisify(fs.writeFile);
 
 const create = async (req, res) => {
+<<<<<<< HEAD
   const peano = req.body.peano;
+=======
+  // const peano = req.body.peano;
+>>>>>>> 320c12f685d10e9be2e96bfa9c200f06a22a87dd
   console.log(req.body.RESULT_MT);
   try {
     const dataToSave = await uploadexcell.find({
@@ -107,7 +111,11 @@ const create = async (req, res) => {
         res.status(400).json({ message: error.message });
       }
     } else {
+<<<<<<< HEAD
       
+=======
+      console.log(req.body.RESULT_MT);
+>>>>>>> 320c12f685d10e9be2e96bfa9c200f06a22a87dd
       let info_appmapping = new appmapping({
         peano: req.body.peano,
         mru: dataToSave[0].mru,
@@ -287,8 +295,8 @@ const findDataMapping = async (req, res) => {
 };
 
 const countMeterTypes = async (req, res) => {
-  console.log(req.body.peacode);
-  if (req.body.peacode == "Select") {
+  console.log(req.body.mruname);
+  if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
         {
@@ -378,7 +386,150 @@ const countMeterTypes = async (req, res) => {
     try {
       const data = await appmapping.aggregate([
         {
-          $match: { peacode: req.body.peacode },
+          $match: { mruname: req.body.mruname },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  apptype: "1",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  apptype: "2",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  apptype: "3",
+                },
+              },
+            ],
+            four: [
+              {
+                $match: {
+                  apptype: "4",
+                },
+              },
+            ],
+            five: [
+              {
+                $match: {
+                  apptype: "5",
+                },
+              },
+            ],
+            six: [
+              {
+                $match: {
+                  apptype: "6",
+                },
+              },
+            ],
+            seven: [
+              {
+                $match: {
+                  apptype: "",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+            D: {
+              $size: "$four",
+            },
+            E: {
+              $size: "$five",
+            },
+            F: {
+              $size: "$six",
+            },
+            G: {
+              $size: "$seven",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+};
+
+const countMeterError = async (req, res) => {
+  console.log(req.body.mruname);
+  if (req.body.mruname == "Select") {
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: { apptype: req.body.apptype },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  } else {
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: { mruname: req.body.mruname, mruname: req.body.mruname },
         },
         {
           $facet: {
@@ -486,6 +637,24 @@ const findDataId = async (req, res) => {
   }
 };
 
+const countPeaname = async (req, res) => {
+  try {
+    const data = await appmapping.aggregate([
+      {
+        $group: {
+          _id: {
+            mruname: "$mruname",
+            Peaname: "$Peaname",
+          },
+        },
+      },
+    ]);
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 //upload file
 async function saveImageToDisk(baseImage) {
   //หา path จริงของโปรเจค
@@ -538,4 +707,6 @@ module.exports = {
   findId,
   findIdAndUpdate,
   findDataId,
+  countPeaname,
+  countMeterError,
 };

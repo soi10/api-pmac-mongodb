@@ -10,5 +10,7 @@ routerappMapping.get("/datamapping", appMappingController.findDataMapping);
 routerappMapping.get("/dataid", appMappingController.findId);
 routerappMapping.put("/dataidupdate", appMappingController.findIdAndUpdate);
 routerappMapping.post("/readid", appMappingController.findDataId);
+routerappMapping.get("/countpeaname", appMappingController.countPeaname);
+routerappMapping.get("/countmetererror", appMappingController.countMeterError);
 
 module.exports = routerappMapping;
