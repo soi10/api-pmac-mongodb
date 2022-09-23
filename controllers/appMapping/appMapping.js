@@ -10,6 +10,7 @@ const writeFileAsync = promisify(fs.writeFile);
 
 const create = async (req, res) => {
   const peano = req.body.peano;
+  console.log(req.body.RESULT_MT);
   try {
     const dataToSave = await uploadexcell.find({
       peano: peano,
@@ -91,9 +92,13 @@ const create = async (req, res) => {
         BaName: req.body.BaName,
         Peacode: req.body.Peacode,
         Peaname: req.body.Peaname,
+        Lat: req.body.Lat,
+        Long: req.body.Long,
         //sign_1: await saveImageToDisk(req.body.sign_1),
         //sign_2: await saveImageToDisk(req.body.sign_2),
       });
+
+
 
       try {
         const dataToSave = await info_appmapping.save();
@@ -102,6 +107,7 @@ const create = async (req, res) => {
         res.status(400).json({ message: error.message });
       }
     } else {
+      
       let info_appmapping = new appmapping({
         peano: req.body.peano,
         mru: dataToSave[0].mru,
@@ -111,18 +117,17 @@ const create = async (req, res) => {
         install: dataToSave[0].install,
         name: dataToSave[0].name,
         address: dataToSave[0].address,
-        peano: dataToSave[0].peano,
         producer: dataToSave[0].producer,
         type: dataToSave[0].type,
         phase: dataToSave[0].phase,
         amp: dataToSave[0].amp,
-        firstinstall: dataToSave[0].firstinstall,
+        firstinstall: dataToSave[0].firtinstall,
         dateinstall: dataToSave[0].dateinstall,
         value: dataToSave[0].value,
         code: dataToSave[0].code,
-        unitintall: dataToSave[0].unitintall,
+        unitintall: dataToSave[0].unitinstall,
         causeinstall: dataToSave[0].causeinstall,
-        fullname: dataToSave[0].name,
+        fullname: req.body.full_name,
         apptype: req.body.apptype,
         I_N: req.body.I_N,
         I_A: req.body.I_A,
@@ -197,9 +202,14 @@ const create = async (req, res) => {
         BaName: req.body.BaName,
         Peacode: req.body.Peacode,
         Peaname: req.body.Peaname,
+        Lat: req.body.Lat,
+        Long: req.body.Long,
         // sign_1: await saveImageToDisk(req.body.sign_1),
         // sign_2: await saveImageToDisk(req.body.sign_2),
       });
+
+
+
       const dataToSave1 = await info_appmapping.save();
       try {
         res.status(200).json(dataToSave1);
