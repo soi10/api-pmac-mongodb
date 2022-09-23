@@ -24,7 +24,6 @@ module.exports = (mongoose) => {
       unitintall: { type: String, default: "" },
       causeinstall: { type: String, default: "" },
       apptype: { type: String, default: "" },
-
       I_N: { type: String, default: "" },
       I_A: { type: String, default: "" },
       I_B: { type: String, default: "" },
