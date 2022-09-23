@@ -9,11 +9,7 @@ const { promisify } = require("util");
 const writeFileAsync = promisify(fs.writeFile);
 
 const create = async (req, res) => {
-<<<<<<< HEAD
   const peano = req.body.peano;
-=======
-  // const peano = req.body.peano;
->>>>>>> 320c12f685d10e9be2e96bfa9c200f06a22a87dd
   console.log(req.body.RESULT_MT);
   try {
     const dataToSave = await uploadexcell.find({
@@ -111,11 +107,7 @@ const create = async (req, res) => {
         res.status(400).json({ message: error.message });
       }
     } else {
-<<<<<<< HEAD
       
-=======
-      console.log(req.body.RESULT_MT);
->>>>>>> 320c12f685d10e9be2e96bfa9c200f06a22a87dd
       let info_appmapping = new appmapping({
         peano: req.body.peano,
         mru: dataToSave[0].mru,
