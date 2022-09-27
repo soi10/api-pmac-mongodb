@@ -9,15 +9,19 @@ const { promisify } = require("util");
 const writeFileAsync = promisify(fs.writeFile);
 
 const create = async (req, res) => {
-  const peano = req.body.peano;
-  console.log(req.body.RESULT_MT);
+  const peano = req.sanitize(req.body.peano);
+  //console.log(req.body.RESULT_MT);
   try {
     const dataToSave = await uploadexcell.find({
       peano: peano,
     });
     if (dataToSave.length == 0) {
+      let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
+      let sign_12 = "data:image/png;base64,"
+      let sign_11 = sign_12+sign_1
+      //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
-        peano: req.body.peano,
+        peano: req.sanitize(req.body.peano),
         apptype: req.body.apptype,
         I_N: req.body.I_N,
         I_A: req.body.I_A,
@@ -94,7 +98,8 @@ const create = async (req, res) => {
         Peaname: req.body.Peaname,
         Lat: req.body.Lat,
         Long: req.body.Long,
-        //sign_1: await saveImageToDisk(req.body.sign_1),
+        //sign_1: sign_11,
+        sign_1: await saveImageToDisk(sign_11),
         //sign_2: await saveImageToDisk(req.body.sign_2),
       });
 
@@ -107,9 +112,14 @@ const create = async (req, res) => {
         res.status(400).json({ message: error.message });
       }
     } else {
-      
+      let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
+      let sign_12 = "data:image/png;base64,"
+     
+      let sign_11 = sign_12+sign_1
+      //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
-        peano: req.body.peano,
+       
+        peano: req.sanitize(req.body.peano),
         mru: dataToSave[0].mru,
         mruname: dataToSave[0].mruname,
         readnumber: dataToSave[0].readnumber,
@@ -204,7 +214,8 @@ const create = async (req, res) => {
         Peaname: req.body.Peaname,
         Lat: req.body.Lat,
         Long: req.body.Long,
-        // sign_1: await saveImageToDisk(req.body.sign_1),
+        //sign_1: sign_11,
+        sign_1: await saveImageToDisk(sign_11),
         // sign_2: await saveImageToDisk(req.body.sign_2),
       });
 
@@ -287,7 +298,7 @@ const findDataMapping = async (req, res) => {
 };
 
 const countMeterTypes = async (req, res) => {
-  console.log(req.body.mruname);
+  //console.log(req.body.mruname);
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
@@ -467,7 +478,7 @@ const countMeterTypes = async (req, res) => {
 };
 
 const countMeterError = async (req, res) => {
-  console.log(req.body.mruname);
+  //console.log(req.body.mruname);
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
@@ -679,6 +690,7 @@ async function saveImageToDisk(baseImage) {
 
 //decodebase64ToImage
 function decodeBase64Image(base64Str) {
+  //var base64Str = base64Str.trim()
   var matches = base64Str.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var image = {};
   if (!matches || matches.length !== 3) {
