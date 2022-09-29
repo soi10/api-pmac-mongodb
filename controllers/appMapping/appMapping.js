@@ -9,15 +9,19 @@ const { promisify } = require("util");
 const writeFileAsync = promisify(fs.writeFile);
 
 const create = async (req, res) => {
-  // const peano = req.body.peano;
-  console.log(req.body.RESULT_MT);
+  const peano = req.sanitize(req.body.peano);
+  //console.log(req.body.RESULT_MT);
   try {
     const dataToSave = await uploadexcell.find({
       peano: peano,
     });
     if (dataToSave.length == 0) {
+      let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
+      let sign_12 = "data:image/png;base64,"
+      let sign_11 = sign_12+sign_1
+      //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
-        peano: req.body.peano,
+        peano: req.sanitize(req.body.peano),
         apptype: req.body.apptype,
         I_N: req.body.I_N,
         I_A: req.body.I_A,
@@ -92,9 +96,14 @@ const create = async (req, res) => {
         BaName: req.body.BaName,
         Peacode: req.body.Peacode,
         Peaname: req.body.Peaname,
-        // sign_1: await saveImageToDisk(req.body.sign_1),
-        // sign_2: await saveImageToDisk(req.body.sign_2),
+        Lat: req.body.Lat,
+        Long: req.body.Long,
+        //sign_1: sign_11,
+        sign_1: await saveImageToDisk(sign_11),
+        //sign_2: await saveImageToDisk(req.body.sign_2),
       });
+
+
 
       try {
         const dataToSave = await info_appmapping.save();
@@ -103,9 +112,14 @@ const create = async (req, res) => {
         res.status(400).json({ message: error.message });
       }
     } else {
-      console.log(req.body.RESULT_MT);
+      let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
+      let sign_12 = "data:image/png;base64,"
+     
+      let sign_11 = sign_12+sign_1
+      //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
-        peano: req.body.peano,
+       
+        peano: req.sanitize(req.body.peano),
         mru: dataToSave[0].mru,
         mruname: dataToSave[0].mruname,
         readnumber: dataToSave[0].readnumber,
@@ -113,18 +127,17 @@ const create = async (req, res) => {
         install: dataToSave[0].install,
         name: dataToSave[0].name,
         address: dataToSave[0].address,
-        peano: dataToSave[0].peano,
         producer: dataToSave[0].producer,
         type: dataToSave[0].type,
         phase: dataToSave[0].phase,
         amp: dataToSave[0].amp,
-        firstinstall: dataToSave[0].firstinstall,
+        firstinstall: dataToSave[0].firtinstall,
         dateinstall: dataToSave[0].dateinstall,
         value: dataToSave[0].value,
         code: dataToSave[0].code,
-        unitintall: dataToSave[0].unitintall,
+        unitintall: dataToSave[0].unitinstall,
         causeinstall: dataToSave[0].causeinstall,
-        fullname: dataToSave[0].name,
+        fullname: req.body.full_name,
         apptype: req.body.apptype,
         I_N: req.body.I_N,
         I_A: req.body.I_A,
@@ -199,9 +212,15 @@ const create = async (req, res) => {
         BaName: req.body.BaName,
         Peacode: req.body.Peacode,
         Peaname: req.body.Peaname,
-        // sign_1: await saveImageToDisk(req.body.sign_1),
+        Lat: req.body.Lat,
+        Long: req.body.Long,
+        //sign_1: sign_11,
+        sign_1: await saveImageToDisk(sign_11),
         // sign_2: await saveImageToDisk(req.body.sign_2),
       });
+
+
+
       const dataToSave1 = await info_appmapping.save();
       try {
         res.status(200).json(dataToSave1);
@@ -279,6 +298,10 @@ const findDataMapping = async (req, res) => {
 };
 
 const countMeterTypes = async (req, res) => {
+<<<<<<< HEAD
+=======
+  //console.log(req.body.mruname);
+>>>>>>> 803a3dccca6fb90e6eedd58f493ab952af947c6f
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
@@ -458,8 +481,13 @@ const countMeterTypes = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 const countMeterError1 = async (req, res) => {
   // console.log(req.body.mruname);
+=======
+const countMeterError = async (req, res) => {
+  //console.log(req.body.mruname);
+>>>>>>> 803a3dccca6fb90e6eedd58f493ab952af947c6f
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
@@ -635,6 +663,7 @@ async function saveImageToDisk(baseImage) {
 
 //decodebase64ToImage
 function decodeBase64Image(base64Str) {
+  //var base64Str = base64Str.trim()
   var matches = base64Str.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var image = {};
   if (!matches || matches.length !== 3) {
