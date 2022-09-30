@@ -12,6 +12,7 @@ const auth = require("./middleware/auth");
 const expressSanitizer = require('express-sanitizer');
 const helmet = require('helmet');
 const reateLimit = require('express-rate-limit');
+require("dotenv").config();
 
 global.__basedir = __dirname + "/..";
 
@@ -54,11 +55,19 @@ const routerappMapping = require("./routes/appMapping/appMapping");
 const routerappSearch = require("./routes/appSearch/appSearch");
 const routerRegisDevice = require("./routes/regis_device");
 const routerUpload = require("./routes/uploads");
+const login_idm = require("./routes/login_router")
 
 app.use("/appMapping/",jsonParser, routerappMapping);
 app.use("/regisdevice/", routerRegisDevice);
 app.use("/uploads/", routerUpload);
 app.use("/appsearch/", jsonParser, routerappSearch);
+app.use("/login/api/",jsonParser,login_idm)
+
+app.get("/login/", (req, res) => {
+  res.json({
+    message: "Hello from api",
+  });
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

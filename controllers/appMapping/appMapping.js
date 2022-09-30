@@ -16,7 +16,7 @@ const create = async (req, res) => {
       peano: peano,
     });
     if (dataToSave.length == 0) {
-      let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
+      let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");;
       let sign_12 = "data:image/png;base64,"
       let sign_11 = sign_12+sign_1
       //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
@@ -98,7 +98,7 @@ const create = async (req, res) => {
         Peaname: req.body.Peaname,
         Lat: req.body.Lat,
         Long: req.body.Long,
-        img_meter: await saveImageToDisk(req.body.img_meter),
+        //img_meter: await saveImageToDisk(req.body.img_meter),
         //sign_1: sign_11,
         sign_1: await saveImageToDisk(sign_11),
         //sign_2: await saveImageToDisk(req.body.sign_2),
@@ -213,7 +213,7 @@ const create = async (req, res) => {
         Peaname: req.body.Peaname,
         Lat: req.body.Lat,
         Long: req.body.Long,
-        img_meter: await saveImageToDisk(req.body.img_meter),
+        //img_meter: await saveImageToDisk(req.body.img_meter),
         //sign_1: sign_11,
         sign_1: await saveImageToDisk(sign_11),
         // sign_2: await saveImageToDisk(req.body.sign_2),
@@ -296,10 +296,6 @@ const findDataMapping = async (req, res) => {
 };
 
 const countMeterTypes = async (req, res) => {
-<<<<<<< HEAD
-=======
-  //console.log(req.body.mruname);
->>>>>>> 803a3dccca6fb90e6eedd58f493ab952af947c6f
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
@@ -479,13 +475,8 @@ const countMeterTypes = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 const countMeterError1 = async (req, res) => {
   // console.log(req.body.mruname);
-=======
-const countMeterError = async (req, res) => {
-  //console.log(req.body.mruname);
->>>>>>> 803a3dccca6fb90e6eedd58f493ab952af947c6f
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
