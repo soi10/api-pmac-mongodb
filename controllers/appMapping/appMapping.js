@@ -17,8 +17,8 @@ const create = async (req, res) => {
     });
     if (dataToSave.length == 0) {
       let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
-      let sign_12 = "data:image/png;base64,"
-      let sign_11 = sign_12+sign_1
+      let sign_12 = "data:image/png;base64,";
+      let sign_11 = sign_12 + sign_1;
       //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
         peano: req.sanitize(req.body.peano),
@@ -103,8 +103,6 @@ const create = async (req, res) => {
         //sign_2: await saveImageToDisk(req.body.sign_2),
       });
 
-
-
       try {
         const dataToSave = await info_appmapping.save();
         res.status(200).json(dataToSave);
@@ -113,12 +111,11 @@ const create = async (req, res) => {
       }
     } else {
       let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
-      let sign_12 = "data:image/png;base64,"
-     
-      let sign_11 = sign_12+sign_1
+      let sign_12 = "data:image/png;base64,";
+
+      let sign_11 = sign_12 + sign_1;
       //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
-       
         peano: req.sanitize(req.body.peano),
         mru: dataToSave[0].mru,
         mruname: dataToSave[0].mruname,
@@ -219,8 +216,6 @@ const create = async (req, res) => {
         // sign_2: await saveImageToDisk(req.body.sign_2),
       });
 
-
-
       const dataToSave1 = await info_appmapping.save();
       try {
         res.status(200).json(dataToSave1);
@@ -298,10 +293,6 @@ const findDataMapping = async (req, res) => {
 };
 
 const countMeterTypes = async (req, res) => {
-<<<<<<< HEAD
-=======
-  //console.log(req.body.mruname);
->>>>>>> 803a3dccca6fb90e6eedd58f493ab952af947c6f
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
@@ -481,13 +472,8 @@ const countMeterTypes = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 const countMeterError1 = async (req, res) => {
   // console.log(req.body.mruname);
-=======
-const countMeterError = async (req, res) => {
-  //console.log(req.body.mruname);
->>>>>>> 803a3dccca6fb90e6eedd58f493ab952af947c6f
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
