@@ -21,7 +21,7 @@ const create = async (req, res) => {
       let sign_11 = sign_12 + sign_1;
       //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
-        peano: req.sanitize(req.body.peano),
+        peano: req.body.peano,
         apptype: req.body.apptype,
         I_N: req.body.I_N,
         I_A: req.body.I_A,
@@ -98,6 +98,7 @@ const create = async (req, res) => {
         Peaname: req.body.Peaname,
         Lat: req.body.Lat,
         Long: req.body.Long,
+        //img_meter: await saveImageToDisk(req.body.img_meter),
         //sign_1: sign_11,
         sign_1: await saveImageToDisk(sign_11),
         //sign_2: await saveImageToDisk(req.body.sign_2),
@@ -211,6 +212,7 @@ const create = async (req, res) => {
         Peaname: req.body.Peaname,
         Lat: req.body.Lat,
         Long: req.body.Long,
+        //img_meter: await saveImageToDisk(req.body.img_meter),
         //sign_1: sign_11,
         sign_1: await saveImageToDisk(sign_11),
         // sign_2: await saveImageToDisk(req.body.sign_2),
