@@ -296,7 +296,10 @@ const findDataMapping = async (req, res) => {
 };
 
 const countMeterTypes = async (req, res) => {
+<<<<<<< HEAD
+=======
   //console.log(req.body.mruname);
+>>>>>>> 803a3dccca6fb90e6eedd58f493ab952af947c6f
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
@@ -348,6 +351,7 @@ const countMeterTypes = async (req, res) => {
               {
                 $match: {
                   apptype: "",
+                  mruname: " ",
                 },
               },
             ],
@@ -436,7 +440,7 @@ const countMeterTypes = async (req, res) => {
             seven: [
               {
                 $match: {
-                  apptype: "",
+                  apptype: " ",
                 },
               },
             ],
@@ -475,13 +479,18 @@ const countMeterTypes = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
+const countMeterError1 = async (req, res) => {
+  // console.log(req.body.mruname);
+=======
 const countMeterError = async (req, res) => {
   //console.log(req.body.mruname);
+>>>>>>> 803a3dccca6fb90e6eedd58f493ab952af947c6f
   if (req.body.mruname == "Select") {
     try {
       const data = await appmapping.aggregate([
         {
-          $match: { apptype: req.body.apptype },
+          $match: { apptype: "1" },
         },
         {
           $facet: {
@@ -527,59 +536,35 @@ const countMeterError = async (req, res) => {
       res.status(400).json({ message: error.message });
     }
   } else {
+    // console.log(req.body.mruname);
     try {
       const data = await appmapping.aggregate([
         {
-          $match: { mruname: req.body.mruname, mruname: req.body.mruname },
+          $match: {
+            mruname: req.body.mruname,
+            apptype: "1",
+          },
         },
         {
           $facet: {
             first: [
               {
                 $match: {
-                  apptype: "1",
+                  RESULT_MT: "SLOW",
                 },
               },
             ],
             second: [
               {
                 $match: {
-                  apptype: "2",
+                  RESULT_MT: "NORMAL",
                 },
               },
             ],
             third: [
               {
                 $match: {
-                  apptype: "3",
-                },
-              },
-            ],
-            four: [
-              {
-                $match: {
-                  apptype: "4",
-                },
-              },
-            ],
-            five: [
-              {
-                $match: {
-                  apptype: "5",
-                },
-              },
-            ],
-            six: [
-              {
-                $match: {
-                  apptype: "6",
-                },
-              },
-            ],
-            seven: [
-              {
-                $match: {
-                  apptype: "",
+                  RESULT_MT: "FAST",
                 },
               },
             ],
@@ -595,18 +580,6 @@ const countMeterError = async (req, res) => {
             },
             C: {
               $size: "$third",
-            },
-            D: {
-              $size: "$four",
-            },
-            E: {
-              $size: "$five",
-            },
-            F: {
-              $size: "$six",
-            },
-            G: {
-              $size: "$seven",
             },
           },
         },
@@ -710,5 +683,5 @@ module.exports = {
   findIdAndUpdate,
   findDataId,
   countPeaname,
-  countMeterError,
+  countMeterError1,
 };
