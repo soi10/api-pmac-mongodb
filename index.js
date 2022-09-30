@@ -11,8 +11,7 @@ const path = require("path");
 const auth = require("./middleware/auth");
 const expressSanitizer = require('express-sanitizer');
 const helmet = require('helmet');
-
-
+const reateLimit = require('express-rate-limit');
 
 global.__basedir = __dirname + "/..";
 
@@ -22,8 +21,15 @@ app.use(
     limit: "50mb",
   })
 );
-
+const apiRatelimit = reateLimit({
+  windowMs: 60*60*100,
+  max: 100,
+  message:'You have exceeded the 100 requests in 1 hrs limit!', 
+  headers:true
+});
+app.use(apiRatelimit)
 app.use(express.urlencoded({extended: true})); 
+app.use(bodyParser.urlencoded({ extended: true}))
 app.use(express.json());
 
 const jsonParser = bodyParser.json();

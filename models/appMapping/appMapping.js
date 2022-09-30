@@ -99,6 +99,7 @@ module.exports = (mongoose) => {
       Peaname: { type: String, default: "" },
       Lat: { type: String, default: "" },
       Long: { type: String, default: "" },
+      img_meter: { type: String, default: "" },
       sign_1: { type: String, default: "" },
       sign_2: { type: String, default: "" },
       createdAt: { type: Date, default: Date.now },
