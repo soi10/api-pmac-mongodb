@@ -1,5 +1,7 @@
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
+const db = require("../models");
+const loglogin = db.loglogin;
 
 const userLogin = async (req, res) => {
   var data =
@@ -259,13 +261,34 @@ const userLogin = async (req, res) => {
       Peaname1: Peaname1,
     };
 
-    const token = jwt.sign({ dataUser }, "cdscasddjosak213123312");
+    const token = jwt.sign(
+      {
+        user_id: dataUser.Username,
+        FirstName: dataUser.FirstName,
+        LastName:dataUser.LastName
+      
+      },
+      process.env.JWT_KEY,
+        {
+            expiresIn: "2d"
+        }
+    );
     res.json({
       statusCode: 200,
       status: "Success",
       token: token,
       user: dataUser,
     });
+    var ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+    const data_log = new loglogin({
+      Username:dataUser.Username,
+      FirstName:dataUser.FirstName,
+      LastName:dataUser.LastName,
+      BaName:dataUser.BaName,
+      IPAddress:ip
+    })
+     await data_log.save();
+    
   } else {
     res.json({
       statusCode: 401,

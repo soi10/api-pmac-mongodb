@@ -56,12 +56,14 @@ const routerappSearch = require("./routes/appSearch/appSearch");
 const routerRegisDevice = require("./routes/regis_device");
 const routerUpload = require("./routes/uploads");
 const login_idm = require("./routes/login_router")
+const login_register = require("./routes/login_register_router")
 
 app.use("/appMapping/",jsonParser, routerappMapping);
 app.use("/regisdevice/", routerRegisDevice);
 app.use("/uploads/", routerUpload);
 app.use("/appsearch/", jsonParser, routerappSearch);
 app.use("/login/api/",jsonParser,login_idm)
+app.use('/logintest/',login_register)
 
 app.get("/login/", (req, res) => {
   res.json({

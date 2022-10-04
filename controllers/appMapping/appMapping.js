@@ -9,14 +9,12 @@ const { promisify } = require("util");
 const writeFileAsync = promisify(fs.writeFile);
 
 const create = async (req, res) => {
-  const peano = req.sanitize(req.body.peano);
-  //console.log(req.body.RESULT_MT);
   try {
     const dataToSave = await uploadexcell.find({
       peano: peano,
     });
     if (dataToSave.length == 0) {
-      let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");;
+      let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
       let sign_12 = "data:image/png;base64,"
       let sign_11 = sign_12+sign_1
       //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
@@ -98,7 +96,7 @@ const create = async (req, res) => {
         Peaname: req.body.Peaname,
         Lat: req.body.Lat,
         Long: req.body.Long,
-        //img_meter: await saveImageToDisk(req.body.img_meter),
+        img_meter: await saveImageToDisk(req.body.img_meter),
         //sign_1: sign_11,
         sign_1: await saveImageToDisk(sign_11),
         //sign_2: await saveImageToDisk(req.body.sign_2),
@@ -213,7 +211,7 @@ const create = async (req, res) => {
         Peaname: req.body.Peaname,
         Lat: req.body.Lat,
         Long: req.body.Long,
-        //img_meter: await saveImageToDisk(req.body.img_meter),
+        img_meter: await saveImageToDisk(req.body.img_meter),
         //sign_1: sign_11,
         sign_1: await saveImageToDisk(sign_11),
         // sign_2: await saveImageToDisk(req.body.sign_2),

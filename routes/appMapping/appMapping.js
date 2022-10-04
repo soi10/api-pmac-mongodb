@@ -4,13 +4,13 @@ const auth = require("../../middleware/auth");
 const routerappMapping = require("express").Router();
 
 routerappMapping.post("/", appMappingController.create);
-routerappMapping.get("/", appMappingController.findAll);
+routerappMapping.get("/",auth, appMappingController.findAll);
 routerappMapping.post("/count", appMappingController.countMeterTypes);
-routerappMapping.get("/datamapping", appMappingController.findDataMapping);
-routerappMapping.get("/dataid", appMappingController.findId);
-routerappMapping.put("/dataidupdate", appMappingController.findIdAndUpdate);
+routerappMapping.get("/datamapping",auth, appMappingController.findDataMapping);
+routerappMapping.get("/dataid",auth, appMappingController.findId);
+routerappMapping.put("/dataidupdate",auth, appMappingController.findIdAndUpdate);
 routerappMapping.post("/readid", appMappingController.findDataId);
-routerappMapping.get("/countpeaname", appMappingController.countPeaname);
+routerappMapping.get("/countpeaname",auth, appMappingController.countPeaname);
 routerappMapping.post(
   "/countmetererror1",
   appMappingController.countMeterError1
