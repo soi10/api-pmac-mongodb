@@ -16,4 +16,24 @@ routerappMapping.post(
   appMappingController.countMeterError1
 );
 
+routerappMapping.post(
+  "/countmetererror2",
+  appMappingController.countMeterError2
+);
+
+routerappMapping.post(
+  "/countmetererror3",
+  appMappingController.countMeterError3
+);
+
+routerappMapping.post(
+  "/countmetererror4",
+  appMappingController.countMeterError4
+);
+
+routerappMapping.post(
+  "/countmetererror5",
+  appMappingController.countMeterError5
+);
+
 module.exports = routerappMapping;

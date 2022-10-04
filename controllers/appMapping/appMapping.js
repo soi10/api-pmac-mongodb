@@ -15,8 +15,13 @@ const create = async (req, res) => {
     });
     if (dataToSave.length == 0) {
       let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
+<<<<<<< HEAD
       let sign_12 = "data:image/png;base64,"
       let sign_11 = sign_12+sign_1
+=======
+      let sign_12 = "data:image/png;base64,";
+      let sign_11 = sign_12 + sign_1;
+>>>>>>> 15cde26b734e5bbdc7af01fd2ecc89daaf36298f
       //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
         peano: req.body.peano,
@@ -110,13 +115,12 @@ const create = async (req, res) => {
       }
     } else {
       let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
-      let sign_12 = "data:image/png;base64,"
-     
-      let sign_11 = sign_12+sign_1
+      let sign_12 = "data:image/png;base64,";
+
+      let sign_11 = sign_12 + sign_1;
       //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
-       
-        peano: req.body.peano,
+        peano: req.sanitize(req.body.peano),
         mru: dataToSave[0].mru,
         mruname: dataToSave[0].mruname,
         readnumber: dataToSave[0].readnumber,
@@ -344,8 +348,7 @@ const countMeterTypes = async (req, res) => {
             seven: [
               {
                 $match: {
-                  apptype: "",
-                  mruname: " ",
+                  mruname: "",
                 },
               },
             ],
@@ -434,7 +437,7 @@ const countMeterTypes = async (req, res) => {
             seven: [
               {
                 $match: {
-                  apptype: " ",
+                  mruname: "",
                 },
               },
             ],
@@ -580,6 +583,434 @@ const countMeterError1 = async (req, res) => {
   }
 };
 
+const countMeterError2 = async (req, res) => {
+  // console.log(req.body.mruname);
+  if (req.body.mruname == "Select") {
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: { apptype: "2" },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  } else {
+    // console.log(req.body.mruname);
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: {
+            mruname: req.body.mruname,
+            apptype: "2",
+          },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+};
+
+const countMeterError3 = async (req, res) => {
+  // console.log(req.body.mruname);
+  if (req.body.mruname == "Select") {
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: { apptype: "3" },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  } else {
+    // console.log(req.body.mruname);
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: {
+            mruname: req.body.mruname,
+            apptype: "3",
+          },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+};
+
+const countMeterError4 = async (req, res) => {
+  // console.log(req.body.mruname);
+  if (req.body.mruname == "Select") {
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: { apptype: "4" },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  } else {
+    // console.log(req.body.mruname);
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: {
+            mruname: req.body.mruname,
+            apptype: "4",
+          },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+};
+
+const countMeterError5 = async (req, res) => {
+  // console.log(req.body.mruname);
+  if (req.body.mruname == "Select") {
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: { apptype: "5" },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  } else {
+    // console.log(req.body.mruname);
+    try {
+      const data = await appmapping.aggregate([
+        {
+          $match: {
+            mruname: req.body.mruname,
+            apptype: "5",
+          },
+        },
+        {
+          $facet: {
+            first: [
+              {
+                $match: {
+                  RESULT_MT: "SLOW",
+                },
+              },
+            ],
+            second: [
+              {
+                $match: {
+                  RESULT_MT: "NORMAL",
+                },
+              },
+            ],
+            third: [
+              {
+                $match: {
+                  RESULT_MT: "FAST",
+                },
+              },
+            ],
+          },
+        },
+        {
+          $project: {
+            A: {
+              $size: "$first",
+            },
+            B: {
+              $size: "$second",
+            },
+            C: {
+              $size: "$third",
+            },
+          },
+        },
+      ]);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+};
+
 const findDataId = async (req, res) => {
   try {
     const data = await appmapping.find(
@@ -673,4 +1104,8 @@ module.exports = {
   findDataId,
   countPeaname,
   countMeterError1,
+  countMeterError2,
+  countMeterError3,
+  countMeterError4,
+  countMeterError5,
 };
