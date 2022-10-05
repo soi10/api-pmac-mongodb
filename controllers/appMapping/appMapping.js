@@ -15,13 +15,8 @@ const create = async (req, res) => {
     });
     if (dataToSave.length == 0) {
       let sign_1 = req.body.sign_1.replace(/(\r\n|\n|\r)/gm, "");
-<<<<<<< HEAD
-      let sign_12 = "data:image/png;base64,"
-      let sign_11 = sign_12+sign_1
-=======
       let sign_12 = "data:image/png;base64,";
       let sign_11 = sign_12 + sign_1;
->>>>>>> 15cde26b734e5bbdc7af01fd2ecc89daaf36298f
       //console.log("Test1",sign_11.replace(/(\r\n|\n|\r)/gm, ""));
       let info_appmapping = new appmapping({
         peano: req.body.peano,
