@@ -44,6 +44,11 @@ routerappMapping.post(
   appMappingController.countMeterError5
 );
 
+routerappMapping.post(
+  "/finddatamappingdetail",
+  appMappingController.findDataMappingDetail
+);
+
 routerappMapping.get("/countpeause", appMappingController.countPeaUse);
 
 module.exports = routerappMapping;

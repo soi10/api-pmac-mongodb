@@ -292,6 +292,18 @@ const findDataMapping = async (req, res) => {
   }
 };
 
+const findDataMappingDetail = async (req, res) => {
+  try {
+    const data = await appmapping.find({
+      mruname: req.body.mruname,
+      apptype: req.body.apptype,
+    });
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 const countMeterTypes = async (req, res) => {
   if (req.body.mruname == "Select") {
     try {
@@ -1115,4 +1127,5 @@ module.exports = {
   countMeterError4,
   countMeterError5,
   countPeaUse,
+  findDataMappingDetail,
 };
