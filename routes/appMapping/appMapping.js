@@ -11,7 +11,7 @@ routerappMapping.get(
   auth,
   appMappingController.findDataMapping
 );
-routerappMapping.get("/dataid", auth, appMappingController.findId);
+routerappMapping.get("/dataid", appMappingController.findId);
 routerappMapping.put(
   "/dataidupdate",
   auth,
