@@ -23,6 +23,7 @@ const userLogin = async (req, res) => {
                       </Login>\r\n  
                     </soap:Body>\r\n
                   </soap:Envelope>`;
+
   var config = {
     method: "post",
     url: "https://idm.pea.co.th/webservices/IdmServices.asmx",
@@ -34,7 +35,7 @@ const userLogin = async (req, res) => {
 
   let resp = await axios(config)
     .then(function (response) {
-      // console.log(response.data)
+      //console.log(response.data)
       let xmlParser = require("xml2json");
       let LoginresponseJson = JSON.parse(xmlParser.toJson(response.data));
       let LoginResponseCode =
@@ -83,7 +84,7 @@ const userLogin = async (req, res) => {
     let Username = await axios(config2)
       .then(function (response) {
         // console.log(response.data)
-        let xmlParser = require("xml2json");
+        let xmlParser = require("xml2js");
         let LoginresponseJson = JSON.parse(xmlParser.toJson(response.data));
         let LoginresponseText =
           LoginresponseJson["soap:Envelope"]["soap:Body"][
