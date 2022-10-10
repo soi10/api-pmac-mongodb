@@ -292,6 +292,18 @@ const findDataMapping = async (req, res) => {
   }
 };
 
+const findDataMappingDetail = async (req, res) => {
+  try {
+    const data = await appmapping.find({
+      mruname: req.body.mruname,
+      apptype: req.body.apptype,
+    });
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 const countMeterTypes = async (req, res) => {
   if (req.body.mruname == "Select") {
     try {
@@ -1044,6 +1056,17 @@ const countPeaname = async (req, res) => {
   }
 };
 
+const countPeaUse = async (req, res) => {
+  try {
+    const data = await appmapping.aggregate([
+      { $group: { _id: "$Peaname", count: { $sum: 1 } } },
+    ]);
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 //upload file
 async function saveImageToDisk(baseImage) {
   //หา path จริงของโปรเจค
@@ -1103,4 +1126,6 @@ module.exports = {
   countMeterError3,
   countMeterError4,
   countMeterError5,
+  countPeaUse,
+  findDataMappingDetail,
 };
