@@ -4,7 +4,7 @@ const auth = require("../../middleware/auth");
 const routerappMapping = require("express").Router();
 
 routerappMapping.post("/", appMappingController.create);
-routerappMapping.get("/", auth, appMappingController.findAll);
+routerappMapping.get("/", appMappingController.findAll);
 routerappMapping.post("/count", appMappingController.countMeterTypes);
 routerappMapping.get(
   "/datamapping",

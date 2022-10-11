@@ -58,7 +58,7 @@ const routerUpload = require("./routes/uploads");
 const login_idm = require("./routes/login_router");
 const login_register = require("./routes/login_register_router");
 
-app.use("/appMapping/", jsonParser, routerappMapping);
+app.use("/appMapping/", routerappMapping);
 app.use("/peatomruname/", jsonParser, routerpeaTomruname);
 app.use("/regisdevice/", routerRegisDevice);
 app.use("/uploads/", routerUpload);
