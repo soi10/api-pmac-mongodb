@@ -1,4 +1,4 @@
-const argon2 = require('argon2');
+//const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const db = require("../models");
 const login_regis = db.loginregis;

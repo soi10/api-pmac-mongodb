@@ -17,6 +17,7 @@ const create = async (req, res) => {
       
     });
     if(req.body.sign_1 == 0){
+      console.log("Test",req.body.sign_1)
       if (dataToSave.length == 0) {
         let sign_12 = "data:image/png;base64,"
         let imgmeter = sign_12+req.body.img_meter.replace(/(\r\n|\n|\r)/gm, "");
