@@ -8,7 +8,6 @@ const search = async (req, res) => {
   if (!peaname) {
     res.status(400).json({ message: "กรอก PEA มิเตอร์" });
   } else {
-    console.log(peaname);
     try {
       const dataTosearch = await peatomruname.find({
         peaname: peaname,
@@ -16,13 +15,22 @@ const search = async (req, res) => {
       res.status(200).json({
         data: dataTosearch[0].mruname,
       });
-      //   console.log(dataTosearch);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
   }
 };
 
+const getname = async (req, res) => {
+  try {
+    const data = await peatomruname.find();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   search,
+  getname,
 };

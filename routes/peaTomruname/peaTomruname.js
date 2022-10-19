@@ -3,5 +3,6 @@ const peaTomrunameController = require("../../controllers/peaTomruname/peaTomrun
 const routerpeaTomruname = require("express").Router();
 
 routerpeaTomruname.post("/", peaTomrunameController.search);
+routerpeaTomruname.get("/getname", peaTomrunameController.getname);
 
 module.exports = routerpeaTomruname;
