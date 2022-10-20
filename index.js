@@ -49,6 +49,8 @@ database.once("connected", () => {
 app.use(express.json());
 app.use(expressSanitizer());
 app.use(helmet());
+app.use(express.static('public'))
+app.use('/uploads',express.static('uploads'))
 
 const routerappMapping = require("./routes/appMapping/appMapping");
 const routerappSearch = require("./routes/appSearch/appSearch");
