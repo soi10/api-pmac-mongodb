@@ -32,6 +32,7 @@ app.use(apiRatelimit);
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const jsonParser = bodyParser.json();
 
