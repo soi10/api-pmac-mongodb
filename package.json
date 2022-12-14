@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.0",
     "argon2": "^0.29.1",
     "axios": "^0.27.2",
     "base64-img": "^1.0.1",
