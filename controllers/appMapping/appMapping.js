@@ -1,5 +1,5 @@
 const ObjectId = require("mongodb").ObjectId;
-const db = require("../../models");
+const db = require("../../models/");
 const appmapping = db.appmapping;
 const uploadexcell = db.uploadexcell;
 const uuidv4 = require("uuid");
