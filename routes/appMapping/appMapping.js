@@ -8,13 +8,11 @@ routerappMapping.get("/", appMappingController.findAll);
 routerappMapping.post("/count", appMappingController.countMeterTypes);
 routerappMapping.get(
   "/datamapping",
-  auth,
   appMappingController.findDataMapping
 );
 routerappMapping.get("/dataid", appMappingController.findId);
 routerappMapping.put(
   "/dataidupdate",
-  auth,
   appMappingController.findIdAndUpdate
 );
 routerappMapping.post("/readid", appMappingController.findDataId);
